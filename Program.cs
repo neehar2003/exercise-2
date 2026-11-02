@@ -1,13 +1,7 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 
 
-
-
-
-
-
-
-/*record Ticket(string Title, string Owner, string State);
 var tickets = new List<Ticket>
 {
  new("Write README", "Asha", "Done"),
@@ -15,4 +9,25 @@ var tickets = new List<Ticket>
  new("Review PR", "Ravi", "ToDo"),
  new("Set up Docker", "Ravi", "ToDo"),
  new("Fix login bug", "Meera", "InProgress"),
-}; */
+}; 
+
+Dictionary<string, int> counts = new Dictionary<string, int>();
+foreach(var ticket in tickets)
+{
+    if(counts.TryGetValue(ticket.State, out int currentCount))
+    {
+        counts[ticket.State] = currentCount + 1;
+    }
+    else
+    {
+        counts[ticket.State] = 1;
+    }
+}
+
+foreach(var entry in counts)
+{
+    Console.WriteLine($"{entry.Key}: {entry.Value}");
+}
+
+record Ticket(string Title, string Owner, string State);
+
